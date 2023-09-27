@@ -8,7 +8,7 @@ import authRoute from './routes/author.js';
 import bookRoute from './routes/book.js';
 
 const app = express();
-env.config({ path: './etc/secrets/' });
+env.config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
