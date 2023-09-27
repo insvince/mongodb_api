@@ -10,6 +10,7 @@ import bookRoute from './routes/book.js';
 const app = express();
 env.config();
 const port = process.env.PORT || 3001;
+console.log(process.env.MONGODB_URL);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
