@@ -9,6 +9,7 @@ import bookRoute from './routes/book.js';
 
 const app = express();
 env.config();
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -18,7 +19,7 @@ app.use(cors());
 
 /* MONGODB CONNECT */
 mongoose
-    .connect(process.env.MONGODB_URL)
+    .connect(port)
     .then(console.log('Connected Database!'))
     .catch(err => {
         console.log(err);
@@ -28,6 +29,6 @@ mongoose
 app.use('/api/auth', authRoute);
 app.use('/api/book', bookRoute);
 
-app.listen(process.env.PORT, () => {
-    console.log('Server is running...');
+app.listen(port, () => {
+    console.log('Server is running in port:' + port);
 });
