@@ -10,7 +10,6 @@ import bookRoute from './routes/book.js';
 const app = express();
 env.config();
 const port = process.env.PORT || 3001;
-console.log(process.env.MONGODB_URL);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -20,7 +19,7 @@ app.use(cors());
 
 /* MONGODB CONNECT */
 mongoose
-    .connect(`${process.env.MONGODB_URL}`)
+    .connect(process.env.MONGODB_URL)
     .then(console.log('Connected Database!'))
     .catch(err => {
         console.log(err);
