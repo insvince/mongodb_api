@@ -1,9 +1,3 @@
-Portfolio Personal - Landing Page
-
-
-Vince - Thanks for visited
-
-
 Crud Api App - Nodejs
 
 
