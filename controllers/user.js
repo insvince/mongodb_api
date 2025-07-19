@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/model.js';
-import { jwt } from 'jsonwebtoken';
 
 const userController = {
     getToken: async (req, res) => {

@@ -4,28 +4,17 @@ import { verifyToken, verifyAdmin } from '../models/middlewares.js';
 
 const router = express.Router();
 
-// ✅ Route đăng nhập KHÔNG cần xác thực
+// ✅ Cho phép lấy token mà không cần token
 router.post('/token', userController.getToken);
 
-// ✅ Các route dưới đây YÊU CẦU token và quyền admin
+// ⚠️ Tất cả route dưới đây cần có token & là admin
 router.use(verifyToken, verifyAdmin);
 
-/* CREATE USER */
 router.post('/', userController.createUser);
-
-/* CREATE MANY USERS */
 router.post('/many', userController.createManyUsers);
-
-/* GET ALL USERS */
 router.get('/', userController.getAllUsers);
-
-/* GET USER BY ID */
 router.get('/:id', userController.getUserById);
-
-/* UPDATE USER */
 router.put('/:id', userController.updateUser);
-
-/* DELETE USER */
 router.delete('/:id', userController.deleteUser);
 
 export default router;
