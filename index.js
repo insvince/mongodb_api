@@ -30,7 +30,7 @@ mongoose
 
 /* ROUTES */
 app.use('/api/auth', authRoute);
-app.use('/api/book', bookRoute);
+app.use('/api/books', bookRoute);
 
 app.listen(port, () => {
     console.log('Server is running in port:' + port);
