@@ -19,12 +19,12 @@ app.use(cors());
 
 /* MONGODB CONNECT */
 mongoose
-    .connect(`${process.env.MONGODB}`, {
+    .connect(`mongodb+srv://phuochuy1328:@Vince13@mongoapi.it9qvwx.mongodb.net/public_api?retryWrites=true&w=majority&appName=mongoapi`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
     .then(console.log('Connected Database!'))
-    .catch(err => {
+    .catch((err) => {
         console.log(err);
     });
 
