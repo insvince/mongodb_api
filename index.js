@@ -6,7 +6,8 @@ import env from 'dotenv';
 import mongoose from 'mongoose';
 import authRoute from './routes/author.js';
 import bookRoute from './routes/book.js';
-import userRoote from './routes/user.js';
+import userRoute from './routes/user.js';
+import genresRoute from './routes/genres.js';
 
 const app = express();
 env.config();
@@ -24,7 +25,7 @@ mongoose
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
-    .then(console.log('Connected Database!'))
+    .then(() => console.log('Connected Database!'))
     .catch((err) => {
         console.log(err);
     });
@@ -32,7 +33,8 @@ mongoose
 /* ROUTES */
 app.use('/api/authors', authRoute);
 app.use('/api/books', bookRoute);
-app.use('/api/users', userRoote);
+app.use('/api/users', userRoute);
+app.use('/api/genres', genresRoute);
 
 app.listen(port, () => {
     console.log('Server is running in port:' + port);
