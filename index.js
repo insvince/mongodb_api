@@ -1,14 +1,17 @@
+// Library Management System - Backend
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
 import env from 'dotenv';
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import rateLimit from 'express-rate-limit';
+// Routes
 import authRoute from './routes/author.js';
 import bookRoute from './routes/book.js';
 import userRoute from './routes/user.js';
 import genresRoute from './routes/genres.js';
-import rateLimit from 'express-rate-limit';
 
 const app = express();
 env.config();

@@ -1,21 +1,56 @@
+import bcrypt from 'bcrypt';
 import { User } from '../models/model.js';
 
 const userController = {
-    // Tạo mới user
+    // Tạo mới user với password được hash
     createUser: async (req, res) => {
         try {
-            const newUser = new User(req.body);
+            // Hash password
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+
+            // Tạo user mới với password đã hash
+            const newUser = new User({
+                ...req.body,
+                password: hashedPassword,
+            });
+
             const savedUser = await newUser.save();
-            res.status(201).json(savedUser);
+            const userObj = savedUser.toObject();
+            delete userObj.password;
+
+            res.status(201).json(userObj);
         } catch (err) {
             res.status(400).json({ error: err.message });
         }
     },
+    // Tạo mới user với password được hash
     createManyUsers: async (req, res) => {
         try {
-            // req.body là mảng các users
-            const usersList = await User.insertMany(req.body);
-            res.status(201).json(usersList);
+            const saltRounds = 10;
+
+            // Hash từng mật khẩu trong mảng users
+            const usersWithHashedPasswords = await Promise.all(
+                req.body.map(async (user) => {
+                    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+                    return {
+                        ...user,
+                        password: hashedPassword,
+                    };
+                })
+            );
+
+            // Lưu vào database
+            const insertedUsers = await User.insertMany(usersWithHashedPasswords);
+
+            // Ẩn mật khẩu trước khi trả về client
+            const sanitizedUsers = insertedUsers.map((user) => {
+                const userObj = user.toObject();
+                delete userObj.password;
+                return userObj;
+            });
+
+            res.status(201).json(sanitizedUsers);
         } catch (err) {
             res.status(400).json({ error: err.message });
         }
