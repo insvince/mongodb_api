@@ -6,6 +6,7 @@ import env from 'dotenv';
 import mongoose from 'mongoose';
 import authRoute from './routes/author.js';
 import bookRoute from './routes/book.js';
+import userRoote from './routes/user.js';
 
 const app = express();
 env.config();
@@ -31,7 +32,7 @@ mongoose
 /* ROUTES */
 app.use('/api/authors', authRoute);
 app.use('/api/books', bookRoute);
-app.use('/api/users', bookRoute);
+app.use('/api/users', userRoote);
 
 app.listen(port, () => {
     console.log('Server is running in port:' + port);
