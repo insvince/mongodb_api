@@ -12,6 +12,8 @@ import authRoute from './routes/author.js';
 import bookRoute from './routes/book.js';
 import userRoute from './routes/user.js';
 import genresRoute from './routes/genres.js';
+// Middleware
+import { verifyAdmin, verifyToken } from './models/middlewares.js';
 
 const app = express();
 env.config();

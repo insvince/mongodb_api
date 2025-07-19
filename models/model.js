@@ -27,6 +27,11 @@ const userSchema = new mongoose.Schema(
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true, select: false }, // 👈 ẩn field này khi gọi find
         age: { type: Number },
+        role: {
+            type: String,
+            enum: ['user', 'admin'],
+            default: 'user',
+        },
     },
     { collection: 'users' }
 );
