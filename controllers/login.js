@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { User } from '../models/model.js';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 const loginController = {
     // Lấy token cho người dùng
