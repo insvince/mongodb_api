@@ -15,7 +15,7 @@ const genresController = {
     // Lấy tất cả genres (danh sách thể loại duy nhất từ books)
     getAllGenres: async (req, res) => {
         try {
-            const genres = await Book.distinct('genres');
+            const genres = await Genres.find();
             res.status(200).json(genres);
         } catch (err) {
             res.status(500).json({ error: err.message });
