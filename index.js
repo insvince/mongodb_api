@@ -29,8 +29,9 @@ mongoose
     });
 
 /* ROUTES */
-app.use('/api/auth', authRoute);
+app.use('/api/authors', authRoute);
 app.use('/api/books', bookRoute);
+app.use('/api/users', bookRoute);
 
 app.listen(port, () => {
     console.log('Server is running in port:' + port);

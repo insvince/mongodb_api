@@ -8,7 +8,7 @@ const authorSchema = new mongoose.Schema(
         national: { type: String },
         description: { type: String, maxlength: 180 },
     },
-    { collection: 'users' }
+    { collection: 'authors' }
 );
 
 const bookSchema = new mongoose.Schema(
@@ -21,7 +21,18 @@ const bookSchema = new mongoose.Schema(
     { collection: 'books' }
 );
 
+const userSchema = new mongoose.Schema(
+    {
+        name: { type: String, required: true },
+        email: { type: String, required: true, unique: true },
+        password: { type: String, required: true },
+        age: { type: Number },
+    },
+    { collection: 'users' }
+);
+
 let Book = mongoose.model('Book', bookSchema);
 let Author = mongoose.model('Author', authorSchema);
+let User = mongoose.model('User', userSchema);
 
-export { Book, Author };
+export { Book, Author, User };
