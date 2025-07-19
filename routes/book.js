@@ -1,24 +1,16 @@
 import express from 'express';
 import bookController from '../controllers/book.js';
+import { verifyToken, verifyAdmin } from '../middlewares/auth.js';
 
 const router = express.Router();
 
-/* ADD BOOK */
-router.post('/', bookController.addBook);
+router.get('/', verifyToken, bookController.getAllBooks);
+router.get('/:id', verifyToken, bookController.getBook);
 
-/* ADD MANY BOOKS */
-router.post('/many', bookController.addManyBooks); // Thêm dòng này
-
-/* GET ALL BOOKS */
+router.use(verifyToken, verifyAdmin);
 router.get('/', bookController.getAllBooks);
-
-/* GET BOOK */
 router.get('/:id', bookController.getBook);
-
-/* UPDATE BOOK */
 router.put('/:id', bookController.updateBook);
-
-/* DELETE BOOK */
 router.delete('/:id', bookController.deleteBook);
 
 export default router;

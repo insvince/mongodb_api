@@ -12,8 +12,7 @@ import authRoute from './routes/author.js';
 import bookRoute from './routes/book.js';
 import userRoute from './routes/user.js';
 import genresRoute from './routes/genres.js';
-// Middleware
-import { verifyAdmin, verifyToken } from './models/middlewares.js';
+import loginRoute from './routes/login.js';
 
 const app = express();
 env.config();
@@ -49,6 +48,7 @@ app.use('/api/authors', authRoute);
 app.use('/api/books', bookRoute);
 app.use('/api/users', userRoute);
 app.use('/api/genres', genresRoute);
+app.use('/api/login', loginRoute);
 
 app.listen(port, () => {
     console.log('Server is running in port:' + port);

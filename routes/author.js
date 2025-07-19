@@ -1,24 +1,16 @@
 import express from 'express';
 import authController from '../controllers/author.js';
+import { verifyToken, verifyAdmin } from '../middlewares/auth.js';
 
 const router = express.Router();
 
-/* ADD AUTHOR */
+router.get('/', verifyToken, authController.getAllAuthors);
+router.get('/:id', verifyToken, authController.getAnAuthor);
+
+router.use(verifyToken, verifyAdmin);
 router.post('/', authController.addAuthor);
-
-/* ADD MANY AUTHORS */
 router.post('/many', authController.addManyAuthors); // Thêm dòng này
-
-/* GET ALL AUTHOR */
-router.get('/', authController.getAllAuthors);
-
-/* GET AN AUTHOR */
-router.get('/:id', authController.getAnAuthor);
-
-/* UPDATE AUTHOR */
 router.put('/:id', authController.updateAuthor);
-
-/* DELETE AUTHOR */
 router.delete('/:id', authController.deleteAuthor);
 
 export default router;
