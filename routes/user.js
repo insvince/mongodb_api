@@ -6,6 +6,9 @@ const router = express.Router();
 /* CREATE USER */
 router.post('/', userController.createUser);
 
+/* CREATE MANY USERS */
+router.post('/many', userController.createManyUsers); // Thêm dòng này nếu có controller
+
 /* GET ALL USERS */
 router.get('/', userController.getAllUsers);
 

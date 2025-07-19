@@ -1,4 +1,4 @@
-import { Author, Book, User } from '../models/model.js';
+import { User } from '../models/model.js';
 
 const userController = {
     // Tạo mới user
@@ -7,6 +7,15 @@ const userController = {
             const newUser = new User(req.body);
             const savedUser = await newUser.save();
             res.status(201).json(savedUser);
+        } catch (err) {
+            res.status(400).json({ error: err.message });
+        }
+    },
+    createManyUsers: async (req, res) => {
+        try {
+            // req.body là mảng các users
+            const usersList = await User.insertMany(req.body);
+            res.status(201).json(usersList);
         } catch (err) {
             res.status(400).json({ error: err.message });
         }

@@ -1,6 +1,17 @@
 import { Author, Book } from '../models/model.js';
 
 const authController = {
+    // Tạo nhiều authors
+    addManyAuthors: async (req, res) => {
+        try {
+            // req.body là mảng các authors
+            const authorsList = await Author.insertMany(req.body);
+            res.status(201).json(authorsList);
+        } catch (err) {
+            res.status(400).json({ error: err.message });
+        }
+    },
+
     addAuthor: async (req, res) => {
         try {
             const author = new Author(req.body);
@@ -12,9 +23,7 @@ const authController = {
     },
     getAnAuthor: async (req, res) => {
         try {
-            const author = await Author.findById(req.params.id).populate(
-                'books',
-            );
+            const author = await Author.findById(req.params.id).populate('books');
             res.status(200).json(author);
         } catch (err) {
             res.status(500).json(err);

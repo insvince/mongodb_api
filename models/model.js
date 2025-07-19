@@ -31,8 +31,17 @@ const userSchema = new mongoose.Schema(
     { collection: 'users' }
 );
 
+const genresSchema = new mongoose.Schema(
+    {
+        name: { type: String, required: true, unique: true },
+        description: { type: String },
+    },
+    { collection: 'genres' }
+);
+
 let Book = mongoose.model('Book', bookSchema);
 let Author = mongoose.model('Author', authorSchema);
 let User = mongoose.model('User', userSchema);
+let Genres = mongoose.model('Genres', genresSchema);
 
-export { Book, Author, User };
+export { Book, Author, User, Genres };

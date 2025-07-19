@@ -1,7 +1,7 @@
 import { Author, Book } from '../models/model.js';
 
 const bookController = {
-    addABook: async (req, res) => {
+    addBook: async (req, res) => {
         try {
             const newBook = new Book(req.body);
             const savedBook = await newBook.save();
@@ -14,7 +14,16 @@ const bookController = {
             res.status(500).json(err);
         }
     },
-    getABook: async (req, res) => {
+    addManyBooks: async (req, res) => {
+        try {
+            // req.body là mảng các books
+            const booksList = await Book.insertMany(req.body);
+            res.status(201).json(booksList);
+        } catch (err) {
+            res.status(400).json({ error: err.message });
+        }
+    },
+    getBook: async (req, res) => {
         try {
             const book = await Book.findById(req.params.id).populate('author');
             res.status(200).json(book);
