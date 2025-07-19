@@ -5,7 +5,7 @@ const genresController = {
     createGenres: async (req, res) => {
         try {
             // req.body là mảng các genres
-            const genresList = await Genres.insertMany(req.body);
+            const genresList = await Genres.insertMany(req.body).select('-__v');
             res.status(201).json(genresList);
         } catch (err) {
             res.status(400).json({ error: err.message });
@@ -15,7 +15,7 @@ const genresController = {
     // Lấy tất cả genres (danh sách thể loại duy nhất từ books)
     getAllGenres: async (req, res) => {
         try {
-            const genres = await Genres.find();
+            const genres = await Genres.find().select('-__v');
             res.status(200).json(genres);
         } catch (err) {
             res.status(500).json({ error: err.message });

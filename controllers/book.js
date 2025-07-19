@@ -25,7 +25,7 @@ const bookController = {
     },
     getBook: async (req, res) => {
         try {
-            const book = await Book.findById(req.params.id).populate('author');
+            const book = await Book.findById(req.params.id).populate('author').select('-__v');
             res.status(200).json(book);
         } catch (err) {
             res.status(500).json(err);
@@ -33,7 +33,7 @@ const bookController = {
     },
     getAllBooks: async (req, res) => {
         try {
-            const allbooks = await Book.find();
+            const allbooks = await Book.find().select('-__v');
             res.status(200).json(allbooks);
         } catch (err) {
             res.status(500).json(err);

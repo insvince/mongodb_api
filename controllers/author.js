@@ -23,16 +23,17 @@ const authController = {
     },
     getAnAuthor: async (req, res) => {
         try {
-            const author = await Author.findById(req.params.id).populate('books');
+            const author = await Author.findById(req.params.id).populate('books').select('-__v');
             res.status(200).json(author);
         } catch (err) {
             res.status(500).json(err);
         }
     },
+
     getAllAuthors: async (req, res) => {
         try {
-            const author = await Author.find();
-            res.status(200).json(author);
+            const authors = await Author.find().select('-__v');
+            res.status(200).json(authors);
         } catch (err) {
             res.status(500).json(err);
         }
