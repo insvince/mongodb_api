@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { User } from '../models/model.js';
+import bcrypt from 'bcryptjs';
 
 const loginController = {
     // Lấy token cho người dùng
@@ -26,8 +27,7 @@ const loginController = {
                     email: user.email,
                     role: user.role,
                 },
-                // process.env.JWT_SECRET,
-                'imvince',
+                process.env.JWT_SECRET,
                 { expiresIn: '1d' }
             );
 
