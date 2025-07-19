@@ -19,7 +19,7 @@ app.use(cors());
 
 /* MONGODB CONNECT */
 mongoose
-    .connect(`mongodb+srv://phuochuy1328:@Vince13@mongoapi.it9qvwx.mongodb.net/public_api?retryWrites=true&w=majority&appName=mongoapi`, {
+    .connect(`${process.env.MONGODB_URL}`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
