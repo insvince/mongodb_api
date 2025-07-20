@@ -29,7 +29,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('common'));
 app.use(bodyParser.json({ limit: '30mb' }));
-app.use(cors({ methods: ['GET', 'POST', 'PUT', 'DELETE'], credentials: true, origin: '*', credentials: true }));
+
+const allowedOrigins = ['https://bunny-book-admin.vercel.app', 'http://localhost:3000'];
+
+app.use(
+    cors({
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true,
+        origin: (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
+        credentials: true,
+    })
+);
 
 /* MONGODB CONNECT */
 mongoose
