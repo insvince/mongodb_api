@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('common'));
 app.use(bodyParser.json({ limit: '30mb' }));
-app.use(cors({ methods: ['GET', 'POST', 'PUT', 'DELETE'], credentials: true }));
+app.use(cors({ methods: ['GET', 'POST', 'PUT', 'DELETE'], credentials: true, origin: '*', credentials: true }));
 
 /* MONGODB CONNECT */
 mongoose
