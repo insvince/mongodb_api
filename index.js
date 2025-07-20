@@ -34,7 +34,6 @@ const allowedOrigins = ['https://bunny-book-admin.vercel.app', 'http://localhost
 
 app.use(
     cors({
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
         origin: (origin, callback) => {
             if (!origin || allowedOrigins.includes(origin)) {
@@ -43,7 +42,6 @@ app.use(
                 callback(new Error('Not allowed by CORS'));
             }
         },
-        credentials: true,
     })
 );
 
