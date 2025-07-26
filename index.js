@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan('common'));
 app.use(bodyParser.json({ limit: '30mb' }));
 
-const allowedOrigins = ['https://bunny-book-admin.vercel.app', 'http://localhost:3000'];
+const allowedOrigins = [process.env.ALLOW_ORIGIN];
 
 app.use(
     cors({
